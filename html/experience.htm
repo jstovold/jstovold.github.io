@@ -2,8 +2,10 @@
 <html>
 
   <head>
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <title>James Stovold</title>
+  <script type="text/javascript" src="../js/main.js" />
+
   <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -23,10 +25,10 @@
   <body>
     <div id="div_container" class="container">
       <div id="div_header" class="header">
-	<h1>James Stovold</h1>
-	<h2>Department of Computer Science<br />
-	    University of York</h2>
-	<br />&nbsp;
+        <h1>James Stovold</h1>
+        <h2>School of Computing and Communications<br />
+            Lancaster University Leipzig</h2>
+        <br />&nbsp;
        </div>
 
       <div id="div_spacer" class="green">
@@ -41,13 +43,15 @@
     
       <div id="div_leftpane" class="leftpane">
 	<ul>
-	  <li id="home"><a href="home.htm">Home</a></li>
-	  <li id="research"><a href="research.htm">Research</a></li>
-	  <li id="publications"><a href="https://scholar.google.com/citations?user=gU8ZSYQAAAAJ&hl=en" target="_blank">Publications</a></li>
-	  <li id="teaching"><a href="teaching.htm">Teaching</a></li>
-	  <li id="experience"><a href="experience.htm">Experience</a></li>
-	  <li id="contact"><a href="contact.htm">Contact</a></li>
-          <li id="folklore"><a href="folklore/index.html" target="_blank">Folklore</a></li>
+
+
+          <li id="home" onclick="goto(this.id)">Home</li>
+          <li id="research" onclick="goto(this.id)">Research</li>
+          <li id="publications" onclick="goto(this.id)">Publications</li>
+          <li id="teaching" onclick="goto(this.id)">Teaching</li>
+          <li id="experience" onclick="goto(this.id)">Experience</li>
+          <li id="contact" onclick="goto(this.id)">Contact</li>
+          <li id="folklore" onclick="goto(this.id)">Folklore</li>
 	</ul>
 	
       </div>
