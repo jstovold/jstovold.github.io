@@ -1,7 +1,7 @@
 function goto(id, up)
 {
 
-  if (up) {
+  if (up && id != "folklore") {
     href = 'html/';
   } else {
     href = '';
