@@ -47,7 +47,7 @@
           <li id="research" onclick="goto(this.id)">Research</li>
           <li id="publications" onclick="goto(this.id)">Publications</li>
           <li id="teaching" onclick="goto(this.id)">Teaching</li>
-          <li id="experience" onclick="goto(this.id)">Experience</li>
+          <!--<li id="experience" onclick="goto(this.id)">Experience</li>-->
           <li id="contact" onclick="goto(this.id)">Contact</li>
           <li id="folklore" onclick="goto(this.id)">Folklore</li>
 	</ul>
@@ -64,15 +64,148 @@
 
   <h4>General Research Interests</h4>
   <p>
-    My research interests tend to lean towards anything 'weird' -- in particular, unconventional substrates 
-for computing or computing in biological matter. At the moment I am looking at reservoir computers (such as 
-echo-state networks and liquid-state machines) and finding ways of improving the computational power of simple 
-reservoirs by coupling them together.
-
-    While my research tends not to directly focus on methods, simulation and modelling play a large part in my 
-research. Consequently, I have a large amount of experience working with numerical and agent-based 
-simulations, along with appropriate analyses thereof.
+    My research interests centre around interactions and emergent behaviour, typically falling into the fields of 
+    unconventional computing and artificial life. This has included projects which use the interaction between 
+    waves in chemical reactions to build neural networks, projects studying how humans interact with AI systems, 
+    and projects studying cellular interactions, including how we can either harness these interactions for 
+    computational purposes or model them using cellular automata. I have recently become increasingly interested 
+    in how the reservoir computing model intersects with my interests in unconventional substrates and 
+    developmental processes, and am working towards a bigger project of how these can be applied to build 
+    self-repairing computer systems. <br /> <br />
   </p>
+
+
+  <h4>Neural Cellular Automata</h4>
+
+    <h5>Key references:</h5>
+    <ul>
+        <li> Stovold, J. (2023) <em>''Neural Cellular Automata can Respond to Signals''</em>, Proc. ALIFE 2023, MIT Press (<a href="https://arxiv.org/abs/2305.12971" target="blank">link</a>)
+        <li> Stovold, J. (2025) <em>''Identity Increases Stability in Neural Cellular Automata''</em>, Proc. ALIFE 2025, MIT Press (<a href="https://arxiv.org/abs/2508.06389" target="blank">link</a>)
+    </ul>
+
+  <p>
+    The Neural Cellular Automata (NCA) is an extension to the typical 2-dimensional cellular automata (CA) that makes use 
+    of a neural network to update the state of the cells at each timestep, using convolutional layers to sense the 
+    neighbourhood. <br />
+    <br />
+    The quintessential 2D CA is Conway's Game of Life, which follows the following rules: </p>
+        <ul>
+            <li> Cells are either alive (black) or dead (white) 
+            <li> Any living cell with fewer than two living neighbours dies (underpopulation) 
+            <li> Any living cell with two or three living neighbours lives on to the next generation (survival) 
+            <li> Any living cell with more than three living neighbours dies (overpopulation) 
+            <li> Any dead cell with exactly three living neighbours comes to life (reproduction) 
+        </ul>
+   <p>
+    These simple rules are enough for a huge variety of behaviour to emerge from different seed states. Possibly 
+    the most famous pattern is Gosper's Glider Gun:   </p>
+
+
+    <center>
+        <img src="../img/gospers.gif" width="50%" alt="By Lucas Vieira - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=101736" />
+    </center>
+
+    <p> 
+    The NCA extends 2D CAs by switching from the Boolean state of each cell (alive/dead) to a vector of 
+    reals&mdash;drastically increasing the possible state space&mdash;and switching the hand-crafted rules to use 
+    a neural network instead:  </p>
+
+    <img src="../img/nca_model.png" width="100%" alt="diagram of the neural network architecture of a typical NCA, 
+    taken from (Stovold, 2023), which was adapted from (Mordvintsev et al., 2020), licensed under CC BY 4.0" />
+  
+    <p> 
+        This model can be used to simulate morphogenesis at a cellular level in artificial organisms. By training 
+        the model to grow into a particular shape from a single seed cell, we can observe its growth from a single 
+        'zygote' into a fully-formed organism, while still only permitting local interactions between cells.
+    </p>
+
+<!--    <img src="../img/nca_gecko.gif" width="50%" alt="NCA gecko" />-->
+
+    <p> 
+
+        We can extend this basic model in a variety of ways, for example by encoding information into the seed 
+        cell (similar to how DNA codes for phenotypic traits). In the two rows below is the growth of two 
+        organisms from the same NCA model, but with different information encoded into the seed cell. 
+
+    </p>
+
+    <center>
+        <img src="../img/meditation_growth.gif" width="100%" alt="NCA meditation growth" /> 
+    </center>
+
+    <p>
+        This can be taken further, with multiple (very similar) phenotypes (in this case, geckos with different 
+        numbers of legs) growable from the same NCA model by varying the information encoded into the seed cell (left).
+    </p><br />
+
+    <center>
+        <img src="../img/nca_seed.png" width="35%" alt="NCA seed" /> &nbsp;&nbsp;
+        <img src="../img/nca_geckolegs.gif" width="60%" alt="NCA gecko legs" /> 
+    </center>
+
+
+    <p>
+
+        In some (but not all) cases, we get generalisation from the NCA model. For example, training an NCA to 
+        grow a small heart from a seed encoded with 0.0, and with a large heart from a seed with 1.0, we get a 
+        medium-sized heart in testing if we grow from a seed with 0.5.
+
+    </p>
+
+    <center>
+        <img src="../img/nca_heartsize.gif" width="100%" alt="NCA heart sizes" />
+    </center>
+
+    <p> 
+
+        We can also train the NCA to respond to signals from the environment. In this example, the environment can 
+        provide a signal via an extra channel built into the state vector (left). By sending a signal to a 
+        fully-grown organism, we can train it to respond (in this case, by changing colour). The following 
+        animation (right) shows the same organisms provided with 100 signals repeatedly (it speeds up after the 
+        first few!).
+    </p>
+
+    <center>
+        <img src="../img/nca_env.png" width="35%" alt="NCA environment channel" />&nbsp;&nbsp;
+        <img src="../img/nca_external.gif" width="50%" alt="external signals" style="vertical-align:top;" />
+    </center>
+
+
+    <p>
+
+        Recently, I have been focussed on how to fix one of the inherent problems of the NCA model. When two 
+        organisms are grown in close proximity, they have a tendency to implode, explode, or otherwise fall apart, 
+        in a manner akin to cancerous growth:
+
+    </p>
+    <br />
+    <center>
+        <img src="../img/nca_breakdown.png" width="50%" alt="NCA breakdown" />
+    </center>
+
+    <p>
+
+        It turns out that all we need to fix this problem is to train the NCA to produce a specific number on one 
+        of its channels. Similar to the ''environment'' channel from above, we introduce an ''identity'' channel 
+        (although this time it is possible for the model to both read and write to this channel), and train the 
+        NCA to produce the same value on this channel for all cells it grows.
+
+    </p>
+
+    <p> 
+        
+        This has the effect of stabilising the organisms, allowing us to grow multiple organisms in close 
+        proximity for the first time. This allows us to study&mdash;for the first time&mdash;how these organisms 
+        would respond to the presence of another organism. At no point in their training have they been exposed to 
+        other organisms, and (as shown below), many of the organisms exhibited emergent movement to avoid the 
+        other organism: 
+
+    </p>
+    <center>
+        <img src="../img/nca_gecko_moving.gif" width="50%" alt="NCA gecko moving" />
+    </center>
+
+<!--
 
   <h4>Doctoral Research</h4>
   <p>
@@ -108,12 +241,12 @@ substrate. As spiking neurons intrinsically act as coincidence detectors, this s
 to start.
 
 
-
+-->
  </div>
       </div>
      </span>
      <div id="div_footer" class="footer">
-	Last updated: 9th May 2016
+	Last updated: 24th Aug 2025
      </div>
     </div>
   </body>	
