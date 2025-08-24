@@ -58,7 +58,7 @@ div.mainpane
 
 div.header
 {
- background-image:url("../img/watermark.gif");
+ //background-image:url("../img/watermark.gif");
  background-repeat:no-repeat;
  background-color:#666666;
  text-align:right;
