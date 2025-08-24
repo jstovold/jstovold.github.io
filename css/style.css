@@ -78,21 +78,21 @@ div.yellow
 
 h1, h2
 {
- font-size:130%;
  font-weight:normal;
-
+ font-family: Georgia;
  margin: 0 10px 10px 0;
  color:#eff5b1;
 }
 
 h1
 {
- margin-top:5px;
+ font-size:190%;
+ margin-top:15px;
 }
 
 h2
 {
- font-size:100%;
+ font-size:140%;
 }
 
 *
@@ -111,7 +111,8 @@ div.content
 
 div.content img#me
 {
- margin-left:15px;
+ margin-left: 30px;
+ margin-bottom: 30px;
 }
 
 div.content a:hover
