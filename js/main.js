@@ -8,7 +8,7 @@ function goto(id, up)
   }
   switch (id) {
     case "publications":
-      document.location.href = 'https://scholar.google.com/citations?user=gU8ZSYQAAAAJ&hl=en';
+      document.location.href = 'https://scholar.google.com/citations?hl=en&user=gU8ZSYQAAAAJ&view_op=list_works&sortby=pubdate';
       break;
     case "folklore":
       document.location.href = href + '/folklore/index.html'; 
